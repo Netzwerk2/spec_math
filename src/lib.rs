@@ -499,9 +499,6 @@ impl NormDist for f64 {
 
 /// Implementations of the student's t distribution as a trait
 pub trait TDist {
-    /// Student's t probability density function
-    fn t_pdf(&self, df: Self) -> Self;
-
     /// Student's t cumulative distribution function
     fn t_cdf(&self, df: isize) -> Self;
 
@@ -510,10 +507,6 @@ pub trait TDist {
 }
 
 impl TDist for f64 {
-    fn t_pdf(&self, df: f64) -> f64 {
-        //! Uses [`misc::t_pdf`](crate::misc::t_pdf)
-        crate::misc::t_pdf(df, *self)
-    }
     fn t_cdf(&self, df: isize) -> f64 {
         //! Uses [`cephes64::stdtr`](crate::cephes64::stdtr)
         crate::cephes64::stdtr(df, *self)
